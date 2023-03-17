@@ -1,25 +1,43 @@
 "use client";
 import React, { ChangeEventHandler, FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 function AddPost() {
+    let toastPostID: string;
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [disabled, setDisabled] = useState<boolean>(false);
-    const mutation = useMutation(async (form: any): Promise<string | number> => await axios.post(`/api/posts/addPost`, form));
+    // create post function
+    const mutation = useMutation(async (form: any): Promise<string | number> => await axios.post(`/api/posts/addPost`, form), {
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+                toast.error(error?.response?.data.message, { id: toastPostID });
+            }
+            setDisabled(false);
+        },
+        onSuccess: (data) => {
+            toast.success("Posted!!!👍👍👍", { id: toastPostID });
+            setTitle("");
+            setContent("");
+            setDisabled(false);
+        },
+    });
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        toastPostID = toast.loading("Creating post", { id: toastPostID });
         setDisabled(true);
-        // mutation.mutate({ title, content });
+        mutation.mutate({ title, content });
         // await axios.post(`/api/posts/addPost`, { title, content });
-        const r = await fetch(`http://localhost:3000/api/posts/addPost`, {
-            method: "POST",
-            body: JSON.stringify({ title, content }),
-            headers: { "Content-Type": "application/json" },
-        });
-        const rData = await r.json();
-        console.log(rData);
+        //     const r = await fetch(`http://localhost:3000/api/posts/addPost`, {
+        //         method: "POST",
+        //         body: JSON.stringify({ title, content }),
+        //         headers: { "Content-Type": "application/json" },
+        //     });
+        //     const rData = await r.json();
+        //     console.log(rData);
     };
     return (
         <form onSubmit={handleSubmit} className="bg-white flex-col flex p-10 my-10 items-center">
