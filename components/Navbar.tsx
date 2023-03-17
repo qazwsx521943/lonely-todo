@@ -13,6 +13,7 @@ async function Navbar() {
             <Link href="/">
                 <h1 className=" text-yellow-300 font-extrabold text-4xl">LB</h1>
             </Link>
+            <div></div>
             <ul>{!sessionUser ? <Login /> : <LoggedIn avatar={sessionUser.user?.image} />}</ul>
         </nav>
     );
