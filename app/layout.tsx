@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={`mx-4 md:mx-12 xl:mx-24 ${rubik.variable} bg-black `}>
                 <QueryWrapper>
+                    {/* @ts-expect-error Server Component */}
                     <Navbar />
                     {children}
                 </QueryWrapper>

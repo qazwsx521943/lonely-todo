@@ -27,7 +27,7 @@ export default function Home() {
                 <Post
                     key={post.id}
                     id={post.id}
-                    comments={post.comments}
+                    comments={post.comments!}
                     content={post.content}
                     title={post.title}
                     image={post.user.image}

@@ -1,3 +1,10 @@
+export type Comments = {
+    createdAt: string;
+    message: string;
+    id: string;
+    postId: string;
+    userId: string;
+};
 export type PostType = {
     title: string;
     id: string;
@@ -7,12 +14,7 @@ export type PostType = {
         name: string;
         image: string;
     };
-    comments?: {
-        createdAt: string;
-        id: string;
-        postId: string;
-        userId: string;
-    }[];
+    comments?: Comments[];
 };
 
 export type myPost = {

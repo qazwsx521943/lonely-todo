@@ -3,6 +3,7 @@ import React, { ChangeEventHandler, FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Comments } from "@/types/Posts";
 
 interface Props {
     image: string;
@@ -11,6 +12,7 @@ interface Props {
     content: string;
     createTime: string;
     id: string;
+    comments: Comments[];
 }
 
 function Post({ id, image, username, title, content, createTime, comments }: Props) {

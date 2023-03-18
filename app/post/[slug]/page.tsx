@@ -3,7 +3,7 @@ import React from "react";
 import Post from "@/components/Post";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { PostDetailType } from "@/types/Posts";
+import { Comments, PostDetailType } from "@/types/Posts";
 import Addnotes from "@/components/Addnotes";
 import Notes from "@/components/Notes";
 
@@ -34,7 +34,7 @@ function PostDetail({ params: { slug } }: Props) {
                 comments={data?.comments}
             />
             <div className="flex flex-col gap-2 ">
-                {data.comments.map((note) => (
+                {data.comments.map((note: any) => (
                     <Notes
                         key={note.id}
                         image={note.user.image}
