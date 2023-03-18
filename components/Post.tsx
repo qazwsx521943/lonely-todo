@@ -12,7 +12,7 @@ interface Props {
     id: string;
 }
 
-function Post({ id, image, username, title, content, createTime }: Props) {
+function Post({ id, image, username, title, content, createTime, comments }: Props) {
     const createdAt = new Date(createTime);
     const year = createdAt.getFullYear();
     const month = createdAt.getMonth();
@@ -37,7 +37,7 @@ function Post({ id, image, username, title, content, createTime }: Props) {
                 <div className=" bg-slate-200 py-3 px-5 rounded-lg">
                     <p>{content}</p>
                 </div>
-                <p className="w-1/5 self-end">more information👉</p>
+                <p className="w-1/5 self-end text-right">{comments.length} notes👉</p>
             </div>
         </div>
     );

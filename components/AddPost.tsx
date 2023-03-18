@@ -10,6 +10,7 @@ function AddPost() {
     const [content, setContent] = useState<string>("");
     const [disabled, setDisabled] = useState<boolean>(false);
     // create post function
+    const queryClient = useQueryClient();
     const mutation = useMutation(async (form: any): Promise<string | number> => await axios.post(`/api/posts/addPost`, form), {
         onError: (error) => {
             if (error instanceof AxiosError) {
@@ -19,6 +20,7 @@ function AddPost() {
         },
         onSuccess: (data) => {
             toast.success("Posted!!!👍👍👍", { id: toastPostID });
+            queryClient.invalidateQueries(["posts"])
             setTitle("");
             setContent("");
             setDisabled(false);
