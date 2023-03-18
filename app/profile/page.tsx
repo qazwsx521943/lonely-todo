@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
-import MyPost from "./component/myPost";
+import MyPost from "./component/MyPost";
 
 // async function myPosts() {
 //     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/myPost`, {
@@ -22,7 +22,9 @@ async function Profile() {
 
     return (
         <main>
-            <h1 className="text-2xl text-yellow-400 text-center font-medium">Hello {sessionUser.user?.name}, Is every thing on Track?</h1>
+            <h1 className="text-2xl text-yellow-400 text-center font-medium mb-5">
+                {sessionUser.user?.name}&nbsp;, Is every thing on Track?
+            </h1>
             <MyPost />
         </main>
     );

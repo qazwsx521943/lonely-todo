@@ -51,7 +51,7 @@ function EditPost({ avatar, id, name, title, comments, content }: EditProps) {
                 <p className="text-xs">{content}</p>
             </div>
             <div className="flex items-center font-bold p-2 justify-between">
-                <p className="text-yellow-500">{comments.length} Comments</p>
+                <p className="text-yellow-500">{comments.length} Notes</p>
                 <button
                     onClick={() => {
                         setToggle(true);

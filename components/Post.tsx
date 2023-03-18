@@ -23,7 +23,7 @@ function Post({ id, image, username, title, content, createTime, comments }: Pro
 
     const router = useRouter();
     return (
-        <div className="bg-white my-8 p-8 rounded" onClick={() => router.push(`/post/${id}`)}>
+        <div className="bg-white my-8 p-8 rounded">
             <div className="flex items-center gap-5 justify-between">
                 <div className="flex gap-5 items-center">
                     <Image src={image} alt="avatar" width={40} height={40} className="rounded-full" />
@@ -38,7 +38,9 @@ function Post({ id, image, username, title, content, createTime, comments }: Pro
                 <div className=" bg-slate-200 py-3 px-5 rounded-lg">
                     <p>{content}</p>
                 </div>
-                <p className="w-1/5 self-end text-right">{comments.length} notes👉</p>
+                <p className="w-1/5 self-end text-right cursor-pointer" onClick={() => router.push(`/post/${id}`)}>
+                    {comments.length} notes👉
+                </p>
             </div>
         </div>
     );

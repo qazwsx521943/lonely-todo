@@ -2,14 +2,26 @@
 import React from "react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 type Props = {
     avatar: string | null | undefined;
 };
 
 function LoggedIn({ avatar }: Props) {
+    const router = useRouter();
     return (
         <li className="list-none flex gap-2">
-            {avatar && <Image className="rounded-full" src={avatar} alt="avatar" width={40} height={40} />}
+            {avatar && (
+                <Image
+                    onClick={() => router.push("/profile")}
+                    className="rounded-full cursor-pointer"
+                    src={avatar}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                />
+            )}
             {/* <h2>{avatar}</h2> */}
             <button
                 onClick={() => signOut()}
