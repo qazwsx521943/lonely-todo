@@ -1,4 +1,4 @@
-# ![Lonely Blog](https://qazwsx521943.github.io/lonely-todo/demo/img/Home.png)
+# ![Lonely Blog]()
 
 # Lonely Blog
 
