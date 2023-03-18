@@ -2,6 +2,7 @@
 import React, { ChangeEventHandler, FormEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface Props {
     image: string;
@@ -21,8 +22,9 @@ function Post({ id, image, username, title, content, createTime, comments }: Pro
     const min = createdAt.getMinutes();
 
     console.log("date", date);
+    const router = useRouter();
     return (
-        <div className="bg-white my-8 p-8 rounded">
+        <div className="bg-white my-8 p-8 rounded" onClick={() => router.push(`/post/${id}`)}>
             <div className="flex items-center gap-5 justify-between">
                 <div className="flex gap-5 items-center">
                     <Image src={image} alt="avatar" width={40} height={40} className="rounded-full" />

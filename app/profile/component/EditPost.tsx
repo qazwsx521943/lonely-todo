@@ -1,5 +1,5 @@
 "use client";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import Modal from "./Modal";
@@ -21,20 +21,23 @@ type EditProps = {
 
 function EditPost({ avatar, id, name, title, comments, content }: EditProps) {
     const [toggle, setToggle] = useState<boolean>(false);
+    const queryClient = useQueryClient();
 
     let deleteToastID: string;
     const mutation = useMutation(async (id: string) => await axios.delete("/api/posts/deletePost", { data: id }), {
         onError: (error) => {
-            toast.error("Something's wrong with the network! try again later", { id: deleteToastID });
+            toast.error("Something's wrong with the network! try again later", { id: "delete" });
             console.log(error);
         },
         onSuccess: (data) => {
-            toast.success("Post Deleted👻", { id: deleteToastID });
+            toast.success("Post Deleted👻", { id: "delete" });
+            queryClient.invalidateQueries(["my-posts"]);
             console.log("deleted");
         },
     });
     const handleDelete = () => {
         mutation.mutate(id);
+        toast.loading("Deleting...", { id: "delete" });
         setToggle(!toggle);
     };
     return (
@@ -47,13 +50,13 @@ function EditPost({ avatar, id, name, title, comments, content }: EditProps) {
                 <h2 className="break-all">title:{title}</h2>
                 <p className="text-xs">{content}</p>
             </div>
-            <div className="flex items-center font-bold">
-                <p>{comments.length} Comments</p>
+            <div className="flex items-center font-bold p-2 justify-between">
+                <p className="text-yellow-500">{comments.length} Comments</p>
                 <button
                     onClick={() => {
                         setToggle(true);
                     }}
-                    className=" bg-yellow-400 text-black px-3 py-2  rounded">
+                    className=" bg-yellow-400 text-black px-2 py-1  rounded">
                     Delete
                 </button>
             </div>

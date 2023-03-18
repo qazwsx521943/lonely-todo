@@ -34,3 +34,29 @@ export type myPost = {
         }[];
     }[];
 };
+
+export type PostDetailType = {
+    id: string;
+    title: string;
+    content: string;
+    updatedAt?: string;
+    user: {
+        email: string;
+        id: string;
+        image: string;
+        name: string;
+    };
+    comments: {
+        createdAt?: string;
+        id: string;
+        postId: string;
+        title: string;
+        userId: string;
+        user: {
+            email: string;
+            id: string;
+            image: string;
+            name: string;
+        };
+    }[];
+};

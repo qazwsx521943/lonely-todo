@@ -14,13 +14,13 @@ function AddPost() {
     const mutation = useMutation(async (form: any): Promise<string | number> => await axios.post(`/api/posts/addPost`, form), {
         onError: (error) => {
             if (error instanceof AxiosError) {
-                toast.error(error?.response?.data.message, { id: toastPostID });
+                toast.error(error?.response?.data.message, { id: "addPost" });
             }
             setDisabled(false);
         },
         onSuccess: (data) => {
-            toast.success("Posted!!!👍👍👍", { id: toastPostID });
-            queryClient.invalidateQueries(["posts"])
+            toast.success("Posted!!!👍👍👍", { id: "addPost" });
+            queryClient.invalidateQueries(["posts"]);
             setTitle("");
             setContent("");
             setDisabled(false);
@@ -29,7 +29,7 @@ function AddPost() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        toastPostID = toast.loading("Creating post", { id: toastPostID });
+        toast.loading("Creating post", { id: "addPost" });
         setDisabled(true);
         mutation.mutate({ title, content });
         // await axios.post(`/api/posts/addPost`, { title, content });
