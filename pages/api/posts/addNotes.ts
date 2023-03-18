@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!sessionUser) {
             return res.status(500).json({ message: "unAuthorized" });
         }
-        const user = await prisma.user.findUnique({ where: { email: sessionUser.user?.email } });
+        const user = await prisma.user.findUnique({ where: { email: sessionUser.user?.email! } });
         const { postId, note } = req.body;
         try {
             if (!note.length) {
@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     message: note,
                     postId,
-                    userId: user?.id,
+                    userId: user?.id!,
                 },
             });
             return res.json({ result });

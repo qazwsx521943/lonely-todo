@@ -21,7 +21,6 @@ function Post({ id, image, username, title, content, createTime, comments }: Pro
     const hour = createdAt.getHours();
     const min = createdAt.getMinutes();
 
-    console.log("date", date);
     const router = useRouter();
     return (
         <div className="bg-white my-8 p-8 rounded" onClick={() => router.push(`/post/${id}`)}>

@@ -27,6 +27,7 @@ function Addnotes({ id }: Props) {
         onSuccess: (data) => {
             setDisabled(false);
             toast.success("note added👋", { id: "addNote" });
+            queryClient.invalidateQueries(["post-detail"]);
         },
     });
 

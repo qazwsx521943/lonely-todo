@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { PostDetailType } from "@/types/Posts";
 import Addnotes from "@/components/Addnotes";
+import Notes from "@/components/Notes";
 
 const fetchPostDetail = async (slug: string) => {
     const response = await axios.get(`/api/posts/${slug}`);
@@ -32,6 +33,17 @@ function PostDetail({ params: { slug } }: Props) {
                 createTime={data?.createdAt}
                 comments={data?.comments}
             />
+            <div className="flex flex-col gap-2 ">
+                {data.comments.map((note) => (
+                    <Notes
+                        key={note.id}
+                        image={note.user.image}
+                        username={note.user.name}
+                        note={note.message}
+                        createdTime={note.createdAt}
+                    />
+                ))}
+            </div>
             <Addnotes id={data.id} />
         </div>
     );
