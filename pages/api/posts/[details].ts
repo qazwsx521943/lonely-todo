@@ -4,9 +4,11 @@ import prisma from "@/prisma/prisma";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "GET") {
         console.log(req.query.details);
+        // coercion
+        const postId = `${req.query?.details}`;
         const data = await prisma.post.findUnique({
             where: {
-                id: req.query.details,
+                id: postId,
             },
             include: {
                 user: true,
