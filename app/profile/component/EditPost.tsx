@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Modal from "./Modal";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 type EditProps = {
     id: string;
@@ -20,9 +21,17 @@ type EditProps = {
 
 function EditPost({ avatar, id, name, title, comments, content }: EditProps) {
     const [toggle, setToggle] = useState<boolean>(false);
+
+    let deleteToastID: string;
     const mutation = useMutation(async (id: string) => await axios.delete("/api/posts/deletePost", { data: id }), {
-        onError: (error) => console.log(error),
-        onSuccess: (data) => console.log("deleted"),
+        onError: (error) => {
+            toast.error("Something's wrong with the network! try again later", { id: deleteToastID });
+            console.log(error);
+        },
+        onSuccess: (data) => {
+            toast.success("Post Deleted👻", { id: deleteToastID });
+            console.log("deleted");
+        },
     });
     const handleDelete = () => {
         mutation.mutate(id);
