@@ -8,9 +8,15 @@
 
 ### Add New Post
 
+![image](https://github.com/qazwsx521943/lonely-todo/blob/main/demo/gif/newPost.gif)
+
 ### Add New Note
 
+![image](https://github.com/qazwsx521943/lonely-todo/blob/main/demo/gif/addNotes.gif)
+
 ### Delete Post
+
+![image](https://github.com/qazwsx521943/lonely-todo/blob/main/demo/gif/deletePost.gif)
 
 ## Built with
 
